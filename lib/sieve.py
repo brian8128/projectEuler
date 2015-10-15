@@ -4,7 +4,7 @@ class Sieve:
   'Memory used is O(n)'
 
 
-  def setNotPrime(self, k):
+  def _setNotPrime(self, k):
     self.sieve[k-1] = False
     return
 
@@ -17,12 +17,11 @@ class Sieve:
     self.sieve = [True] * n
 
     # 1 is not prime
-    self.setNotPrime(1)
+    self._setNotPrime(1)
 
     for i in range(2, n):
       if self.isPrime(i):
         tmp = 2 * i
         while tmp <= n:
-          self.setNotPrime(tmp)
+          self._setNotPrime(tmp)
           tmp += i
-
