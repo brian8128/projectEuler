@@ -3,25 +3,21 @@ class Sieve:
   'Construction is O(nlog(log(n))), lookups constant time thereafter.'
   'Memory used is O(n)'
 
-
-  def _setNotPrime(self, k):
-    self.sieve[k-1] = False
-    return
-
   def isPrime(self, k):
-    return self.sieve[k-1]
+    return self.sieve[k]
 
   def __init__(self, n):
 
     # array of n booleans initalized to true
     self.sieve = [True] * n
 
-    # 1 is not prime
-    self._setNotPrime(1)
+    # 0 and 1 are not prime
+    self.sieve[0] = False
+    self.sieve[1] = False
 
     for i in range(2, n):
-      if self.isPrime(i):
+      if self.sieve[i]:
         tmp = 2 * i
-        while tmp <= n:
-          self._setNotPrime(tmp)
+        while tmp < n:
+          self.sieve[tmp] = False
           tmp += i
